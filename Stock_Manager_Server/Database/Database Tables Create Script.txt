@@ -1,0 +1,58 @@
+-- public.customer definition
+
+-- Drop table
+
+-- DROP TABLE public.customer;
+
+CREATE TABLE public.customer (
+	customer_id serial4 NOT NULL,
+	customer_name varchar(50) NULL,
+	CONSTRAINT customer_id_pkey PRIMARY KEY (customer_id)
+);
+
+-- public.horse definition
+
+-- Drop table
+
+-- DROP TABLE public.horse;
+
+CREATE TABLE public.horse (
+	horse_id serial4 NOT NULL,
+	customer_id int4 NOT NULL,
+	horse_name varchar(50) NULL,
+	CONSTRAINT horse_id_pkey PRIMARY KEY (horse_id),
+	CONSTRAINT fk_horse_customer_id FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id)
+);
+
+-- public."transaction" definition
+
+-- Drop table
+
+-- DROP TABLE public."transaction";
+
+CREATE TABLE public."transaction" (
+	transaction_id serial4 NOT NULL,
+	horse_id int4 NOT NULL,
+	stock_id int4 NOT NULL,
+	transaction_date date NOT NULL,
+	transaction_quantity int4 NOT NULL,
+	CONSTRAINT transaction_id_pkey PRIMARY KEY (transaction_id),
+	CONSTRAINT fk_transaction_horse_id FOREIGN KEY (horse_id) REFERENCES public.horse(horse_id),
+	CONSTRAINT fk_transaction_stock_id FOREIGN KEY (stock_id) REFERENCES public.stock(stock_id)
+);
+
+-- public.stock definition
+
+-- Drop table
+
+-- DROP TABLE public.stock;
+
+CREATE TABLE public.stock (
+	stock_id serial4 NOT NULL,
+	stock_type varchar(50) NOT NULL,
+	stock_price float8 NOT NULL,
+	stock_purchase_date date NOT NULL,
+	stock_on_hand int4 NOT NULL,
+	stock_open_stock int4 NOT NULL,
+	CONSTRAINT stock_id_pkey PRIMARY KEY (stock_id)
+);
