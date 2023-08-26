@@ -1,0 +1,27 @@
+Customer
+--
+Customer_ID PK int
+Customer_Name string
+
+Horse
+--
+Horse_ID PK int
+Customer_ID FK >- Customer.Customer_ID
+Horse_Name string
+
+Transaction
+--
+Transaction_ID PK int
+Horse_ID FK >- Horse.Horse_ID
+Stock_ID FK >- Stock.Stock_ID
+Transaction_Date date
+Transaction_Quantity int
+
+Stock
+--
+Stock_ID PK int
+Stock_Type string
+Stock_Price double
+Stock_Purchace_Date date
+Stock_On_Hand int
+Stock_Open_Stock int
